@@ -66,7 +66,7 @@ public final class ExampleQueryRunner
             DistributedQueryRunner queryRunner = super.build();
             try {
                 queryRunner.installPlugin(new ExamplePlugin());
-                queryRunner.createCatalog("example", "example_jdbc", connectorProperties);
+                queryRunner.createCatalog("example", "jdbc", connectorProperties);
                 return queryRunner;
             }
             catch (Throwable e) {
