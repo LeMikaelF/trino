@@ -14,10 +14,13 @@
 
 package io.trino.plugin.example;
 
-import io.trino.testing.AbstractTestQueryFramework;
-import io.trino.testing.QueryRunner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import io.trino.testing.AbstractTestQueryFramework;
+import io.trino.testing.QueryRunner;
+
+@Disabled("requires real databricks credentials, for development only")
 public class TestExampleQueries
         extends AbstractTestQueryFramework
 {
@@ -25,7 +28,12 @@ public class TestExampleQueries
     protected QueryRunner createQueryRunner()
             throws Exception
     {
-        return ExampleQueryRunner.builder().build();
+        // Set these to the nonprod databricks to run tests
+        return ExampleQueryRunner.builder()
+                .addConnectorProperty("client-id", "some-client-id")
+                .addConnectorProperty("client-secret", "some-client-secret")
+                .addConnectorProperty("base-url", "some-base-url")
+                .build();
     }
 
     @Test
